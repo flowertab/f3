@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Tmikha – תמיכה — Support as a Fulcrum</title>
+  <meta name="description" content="Tmikha — where Jewish tradition becomes a fulcrum: lectures, interactive classes, and a safe psychological space with workshops, group psychotherapy, and bookcrossing." />
+  <style>
+    :root{
+      --bg: #F7F3EF;           /* warm off‑white */
+      --paper: #FCFAF7;        /* soft paper */
+      --ink: #2D2A26;          /* charcoal */
+      --muted: #6C655E;        /* warm gray */
+      --accent: #C77D4A;       /* clay */
+      --accent-2: #D9A86C;     /* muted gold */
+      --line: #E8E1D9;         /* hairline */
+      --success: #6E9D7A;      /* sage */
+      --shadow: 0 10px 30px rgba(45,42,38,0.05);
+      --radius: 18px;
+      --radius-sm: 12px;
+      --container: 1100px;
+    }
+    html,body{margin:0;padding:0;background:var(--bg);color:var(--ink);font-family: ui-sans-serif,system-ui,-apple-system,"Segoe UI",Roboto,Inter,"Noto Sans",Arial,"Apple Color Emoji","Segoe UI Emoji";}
+    *{box-sizing:border-box}
+    a{color:inherit;text-decoration:none}
+    img{max-width:100%;display:block}
+
+    /* Layout */
+    .container{max-width:var(--container);margin-inline:auto;padding: clamp(16px, 3vw, 32px);}
+    header{position:sticky;top:0;z-index:50;backdrop-filter:saturate(1.2) blur(8px);}
+    .nav{display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--line);background:color-mix(in srgb, var(--bg) 86%, white 14%)}
+    .brand{display:flex;align-items:baseline;gap:.5rem;font-weight:600;letter-spacing:.2px}
+    .brand small{font-weight:500;color:var(--muted)}
+    .menu{display:flex;gap: clamp(12px, 2vw, 24px);}
+    .menu a{padding:10px 6px;border-radius:10px}
+    .menu a:hover,.menu a:focus{background:var(--paper)}
+
+    .hero{position:relative;isolation:isolate}
+    .hero-inner{display:grid;grid-template-columns: 1.15fr .85fr;gap: clamp(24px, 6vw, 60px);align-items:center;background:var(--paper);border-radius:var(--radius);box-shadow:var(--shadow);padding: clamp(28px, 6vw, 72px);}
+
+    .h1{font-size: clamp(28px, 4.2vw, 52px);line-height:1.08;letter-spacing:.1px;margin:0 0 12px}
+    .lede{font-size: clamp(16px, 1.4vw, 20px);color:var(--muted);max-width:55ch}
+
+    .btn{display:inline-flex;align-items:center;gap:.65rem;margin-top:22px;padding:12px 16px;background:var(--accent);color:white;border-radius:999px;border:1px solid color-mix(in srgb, var(--accent) 70%, black 30%);box-shadow:0 6px 14px rgba(199,125,74,.18);}
+    .btn:hover{transform:translateY(-1px)}
+    .btn.secondary{background:transparent;color:var(--ink);border:1px solid var(--line)}
+
+    .shape{aspect-ratio:1/1;border-radius:28px;background: conic-gradient(from 210deg, var(--accent) 0 25%, var(--accent-2) 25% 55%, #E6C8AF 55% 100%);filter:saturate(.95) contrast(.98);box-shadow: var(--shadow);}
+    .shape::after{content:"";position:absolute;inset:10%;border-radius:24px;background: radial-gradient(70% 80% at 60% 35%, rgba(255,255,255,.25), rgba(255,255,255,0));mix-blend-mode:overlay}
+
+    section{scroll-margin-top:100px;margin-top: clamp(40px, 8vw, 96px)}
+    .section-card{background:var(--paper);border:1px solid var(--line);border-radius:var(--radius);box-shadow:var(--shadow);padding: clamp(22px, 4.5vw, 48px)}
+    .section-head{display:flex;align-items:flex-end;justify-content:space-between;gap:16px;margin-bottom:22px}
+    .section-title{font-size: clamp(22px, 2.6vw, 34px);margin:0}
+
+    .split{display:grid;grid-template-columns:1fr 1fr;gap: clamp(16px, 3vw, 28px)}
+    .card{padding:22px;border:1px solid var(--line);border-radius:var(--radius-sm);background:white}
+
+    .kicker{display:inline-block;font-size:12px;letter-spacing:.18em;text-transform:uppercase;color:var(--muted);border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:white}
+
+    /* Lists */
+    .bullets{display:grid;gap:10px;margin:14px 0 0;padding:0}
+    .bullets li{list-style:none;display:flex;gap:10px}
+    .dot{width:10px;height:10px;border-radius:50%;background:var(--accent-2);margin-top:.45em}
+
+    /* Events */
+    .events{display:grid;gap:14px}
+    .event{display:grid;grid-template-columns: 120px 1fr auto;gap:16px;align-items:center;padding:14px;border:1px solid var(--line);border-radius:12px;background:white}
+    .date{font-variant-numeric:tabular-nums;color:var(--muted)}
+    .pill{font-size:12px;border:1px solid var(--line);padding:6px 10px;border-radius:999px;background:var(--paper)}
+
+    /* Support logos */
+    .logos{display:flex;flex-wrap:wrap;gap:16px;align-items:center}
+    .logo{height:34px;width:auto;filter:grayscale(1) contrast(.7) opacity(.8)}
+    .logo:hover{filter:grayscale(0) opacity(1)}
+
+    /* Footer */
+    footer{margin-top: clamp(40px, 8vw, 120px);padding:30px 0;border-top:1px solid var(--line);color:var(--muted)}
+
+    /* Responsive */
+    @media (max-width: 900px){
+      .hero-inner{grid-template-columns:1fr}
+      .split{grid-template-columns:1fr}
+      .event{grid-template-columns: 1fr}
+    }
+  
+    /* ==== Mobile polish (no markup/logic changes) ==== */
+    @media (max-width: 900px){
+      header{padding-top: env(safe-area-inset-top)}
+      .container{padding: clamp(14px, 4vw, 24px)}
+      .section-card{padding: clamp(18px, 4vw, 36px)}
+      .card{padding: clamp(16px, 3.5vw, 24px)}
+      .menu{flex-wrap:nowrap;overflow-x:auto;-webkit-overflow-scrolling:touch;padding:8px 0;}
+      .menu a{white-space:nowrap;padding:12px 10px}
+      .brand{padding:8px 0}
+      .hero-inner{padding: clamp(22px, 6vw, 60px)}
+    }
+    @media (max-width: 680px){
+      .nav{flex-wrap:wrap;gap:6px}
+      .brand{flex:1}
+      .menu{order:3;width:100%;gap:10px;padding-bottom:4px;border-top:1px solid var(--line)}
+      .menu a{display:inline-flex;align-items:center;justify-content:center;border-radius:12px}
+      .h1{line-height:1.12}
+      .btn{width:100%;justify-content:center}
+      .btn.secondary{margin-top:10px}
+      .logos{gap:12px}
+      .logo{height:28px}
+      section{scroll-margin-top:84px}
+    }
+    @media (max-width: 520px){
+      .lede{font-size:15px}
+      .section-title{font-size: clamp(20px, 6vw, 26px)}
+      .kicker{font-size:11px}
+      .event{gap:12px}
+      .pill{padding:6px 10px}
+      input, textarea{font-size:16px} /* avoid iOS zoom on focus */
+    }
+    @media (pointer:coarse){
+      .menu a{padding:14px 12px}
+      .btn{padding:14px 16px}
+    }
+    /* Respect reduced motion */
+    @media (prefers-reduced-motion: reduce){
+      *{scroll-behavior:auto !important; transition:none !important}
+    }
+
+  
+/* ==== Mobile Nav Toggle (no changes to menu items) ==== */
+.nav-toggle{display:none;position:relative;border:0;background:transparent;cursor:pointer;padding:10px;margin-left:auto}
+.nav-toggle span{display:block;width:26px;height:2px;background:currentColor;margin:6px 0;transition:transform .25s, opacity .25s}
+@media (max-width: 820px){
+  .nav-toggle{display:inline-flex;align-items:center;justify-content:center}
+  /* Collapse menu by default on mobile */
+  #site-menu{display:none;position:absolute;top:100%;left:0;right:0;background:var(--bg, #fff);border-top:1px solid var(--line, rgba(0,0,0,.08));padding:12px 16px;box-shadow:0 10px 30px rgba(0,0,0,.08);z-index:1000}
+  .nav-open #site-menu{display:block}
+  /* Make items tap-friendly */
+  #site-menu a{display:block;padding:12px 8px}
+  /* Lock body scroll when menu open */
+  .nav-open body{overflow:hidden}
+  /* Animated hamburger -> X */
+  .nav-open .nav-toggle span:nth-child(1){transform:translateY(8px) rotate(45deg)}
+  .nav-open .nav-toggle span:nth-child(2){opacity:0}
+  .nav-open .nav-toggle span:nth-child(3){transform:translateY(-8px) rotate(-45deg)}
+}
+
+/* Prefer reduced motion */
+@media (prefers-reduced-motion: reduce){
+  .nav-toggle span{transition:none}
+}
+
+  </style>
+</head>
+<body>
+  <!-- Header / Nav -->
+  <header>
+    <div class="container nav" role="navigation" aria-label="Primary">
+      <a href="#home" class="brand" aria-label="Tmikha Home">
+        <span>Tmikha</span>
+        <small>תמיכה</small>
+      </a>
+      <button class="nav-toggle" aria-expanded="false" aria-controls="site-menu" aria-label="Открыть меню"><span></span><span></span><span></span></button><nav class="menu" id="site-menu">
+        <a href="#about-tmikha">About Tmikha</a>
+        <a href="#safe-place">Safe Place</a>
+        <a href="#events">Lectures & Workshops</a>
+        <a href="#support">Community Support</a>
+        <a href="#contact">Contact</a>
+      </nav>
+    </div>
+  </header>
+
+  <main id="home" class="container">
+    <!-- Hero -->
+    <section class="hero" aria-labelledby="hero-title">
+      <div class="hero-inner">
+        <div>
+          <h1 class="h1" id="hero-title">Support as a fulcrum<br> where Jewish tradition meets psychology.</h1>
+          <p class="lede">Tmikha — <span lang="he" dir="rtl">תמיכה</span> — is a minimal, warm space hosting a series of lectures and interactive classes that explore Jewish tradition in the context of psychology, alongside a safe psychological space for workshops, group psychotherapy, and bookcrossing.</p>
+          <div>
+            <a class="btn" href="#about-tmikha" aria-label="Explore Tmikha">Explore Tmikha</a>
+            <a class="btn secondary" href="#safe-place" aria-label="Learn about the Safe Place">A Safe Place</a>
+          </div>
+        </div>
+        <div style="position:relative">
+          <div class="shape" aria-hidden="true"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Two Paths -->
+    <section class="section-card" aria-labelledby="paths">
+      <div class="section-head">
+        <p class="kicker">Two Paths</p>
+        <h2 class="section-title" id="paths">Choose a focus</h2>
+      </div>
+      <div class="split">
+        <article class="card">
+          <h3>About Tmikha</h3>
+          <p>Tmikha (תמיכה) means support. Here, Jewish tradition becomes a fulcrum for growth, reflection, and resilience.</p>
+          <ul class="bullets" aria-label="Highlights">
+            <li><span class="dot"></span><span>Lectures connecting Torah wisdom and psychology</span></li>
+            <li><span class="dot"></span><span>Interactive classes exploring tradition in modern life</span></li>
+            <li><span class="dot"></span><span>Contemplative tools for inner support</span></li>
+          </ul>
+          <p style="margin-top:14px"><a class="btn secondary" href="#about-tmikha">Learn more</a></p>
+        </article>
+        <article class="card">
+          <h3>About the Safe Place</h3>
+          <p>A gentle, accessible psychological space: lectures, workshops, group psychotherapy, and bookcrossing.</p>
+          <ul class="bullets">
+            <li><span class="dot"></span><span>Evidence‑based, classical approaches</span></li>
+            <li><span class="dot"></span><span>Small groups, confidentiality, care</span></li>
+            <li><span class="dot"></span><span>Knowledge & tools for everyone</span></li>
+          </ul>
+          <p style="margin-top:14px"><a class="btn secondary" href="#safe-place">Discover</a></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- About Tmikha -->
+    <section id="about-tmikha" class="section-card" aria-labelledby="about-title">
+      <div class="section-head">
+        <p class="kicker">About</p>
+        <h2 class="section-title" id="about-title">Tmikha — tradition as support</h2>
+      </div>
+      <div class="split">
+        <div class="card">
+          <p>We bring Jewish tradition into dialogue with psychology. Through a series of lectures and interactive classes, Tmikha offers reflective practices, language, and community to navigate inner life with steadiness.</p>
+          <ul class="bullets">
+            <li><span class="dot"></span><span>Text & practice: teachings, case reflections, Q&A</span></li>
+            <li><span class="dot"></span><span>Accessible explanations for all levels</span></li>
+            <li><span class="dot"></span><span>Warm minimal setting — focus, not noise</span></li>
+          </ul>
+        </div>
+        <div class="card" aria-hidden="true">
+          <!-- Minimal abstract illustration -->
+          <svg viewBox="0 0 400 300" style="width:100%;border-radius:14px">
+            <defs>
+              <linearGradient id="g1" x1="0" y1="0" x2="1" y2="1">
+                <stop offset="0%" stop-color="#EED9C6"/>
+                <stop offset="100%" stop-color="#C77D4A"/>
+              </linearGradient>
+            </defs>
+            <rect width="400" height="300" fill="url(#g1)"/>
+            <circle cx="120" cy="160" r="70" fill="#FCFAF7" opacity=".55"/>
+            <circle cx="260" cy="130" r="90" fill="#FCFAF7" opacity=".35"/>
+          </svg>
+        </div>
+      </div>
+    </section>
+
+    <!-- Safe Place -->
+    <section id="safe-place" class="section-card" aria-labelledby="safe-title">
+      <div class="section-head">
+        <p class="kicker">Psychological Space</p>
+        <h2 class="section-title" id="safe-title">A Safe Place</h2>
+      </div>
+      <div class="split">
+        <div class="card">
+          <p>Lectures, workshops, group psychotherapy, and a bookcrossing nook. A calm container for learning and care aligned with classical, evidence‑based approaches.</p>
+          <ul class="bullets">
+            <li><span class="dot"></span><span>Group psychotherapy (closed cycles)</span></li>
+            <li><span class="dot"></span><span>Workshops with practical tools</span></li>
+            <li><span class="dot"></span><span>Open lectures and reading circles</span></li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Principles</h3>
+          <ul class="bullets">
+            <li><span class="dot"></span><span>Safety, confidentiality, consent</span></li>
+            <li><span class="dot"></span><span>Accessibility — knowledge for everyone</span></li>
+            <li><span class="dot"></span><span>Careful, responsible facilitation</span></li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <!-- Lectures & Workshops / Events -->
+    <section id="events" class="section-card" aria-labelledby="events-title">
+      <div class="section-head">
+        <p class="kicker">Schedule</p>
+        <h2 class="section-title" id="events-title">Lectures & Workshops</h2>
+      </div>
+      <div class="events" id="events-list" aria-live="polite">
+        <!-- JS will inject demo events; replace with your data source -->
+      </div>
+      <p style="margin-top:16px"><a class="btn secondary" href="#contact">Request full schedule</a></p>
+    </section>
+
+    <!-- Community Support -->
+    <section id="support" class="section-card" aria-labelledby="support-title">
+      <div class="section-head">
+        <p class="kicker">Community</p>
+        <h2 class="section-title" id="support-title">With the support of the Jewish community</h2>
+      </div>
+      <p style="max-width:60ch">Tmikha is realized with the generous support of the Jewish community. We acknowledge our partners and friends whose care makes this work possible.</p>
+      <div class="logos" role="list" aria-label="Supporting organizations">
+        <!-- Placeholder word‑mark logos (replace with real SVG/IMG) -->
+        <svg class="logo" viewBox="0 0 160 40" role="img" aria-label="Community One"><rect width="160" height="40" rx="6" fill="#DCD3C7"/></svg>
+        <svg class="logo" viewBox="0 0 160 40" role="img" aria-label="Community Two"><rect width="160" height="40" rx="6" fill="#DCD3C7"/></svg>
+        <svg class="logo" viewBox="0 0 160 40" role="img" aria-label="Community Three"><rect width="160" height="40" rx="6" fill="#DCD3C7"/></svg>
+      </div>
+    </section>
+
+    <!-- Contact -->
+    <section id="contact" class="section-card" aria-labelledby="contact-title">
+      <div class="section-head">
+        <p class="kicker">Contact</p>
+        <h2 class="section-title" id="contact-title">Get in touch</h2>
+      </div>
+      <form class="split" onsubmit="event.preventDefault(); submitForm(this)">
+        <div class="card" style="display:grid;gap:10px">
+          <label>
+            <span>Name</span>
+            <input required name="name" type="text" placeholder="Your name" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:white" />
+          </label>
+          <label>
+            <span>Email</span>
+            <input required name="email" type="email" placeholder="you@example.com" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:white" />
+          </label>
+          <label>
+            <span>Message</span>
+            <textarea required name="message" rows="5" placeholder="Hello Tmikha…" style="width:100%;padding:12px;border:1px solid var(--line);border-radius:10px;background:white;resize:vertical"></textarea>
+          </label>
+          <button class="btn" type="submit">Send</button>
+        </div>
+        <div class="card">
+          <h3>Visit / Follow</h3>
+          <p class="lede" style="font-size:16px">We’ll reply within a few days. For schedule requests and group therapy cycles, please include your availability.</p>
+          <ul class="bullets">
+            <li><span class="dot"></span><span>Email: hello@tmikha.example</span></li>
+            <li><span class="dot"></span><span>Address: (optional) City · Country</span></li>
+          </ul>
+        </div>
+      </form>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container" role="contentinfo">
+      <div style="display:flex;justify-content:space-between;gap:14px;flex-wrap:wrap">
+        <small>© <span id="year"></span> Tmikha — תמיכה</small>
+        <small><a href="#home">Back to top</a></small>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    // Smooth scrolling for in-page anchors (native in many browsers, but ensure)
+    document.querySelectorAll('a[href^="#"]').forEach(a=>{
+      a.addEventListener('click',e=>{
+        const id=a.getAttribute('href').slice(1);
+        const el=document.getElementById(id);
+        if(el){ e.preventDefault(); el.scrollIntoView({behavior:'smooth', block:'start'}) }
+      })
+    })
+
+    // Demo events (replace with real data or CMS)
+    const events=[
+      { date:'2025-10-15', title:'Tradition & Resilience: Sources as Inner Support', type:'Tmikha', blurb:'Lecture + guided reflection' },
+      { date:'2025-11-02', title:'Safe Place: Boundaries & Belonging', type:'Safe Place', blurb:'Workshop with practical tools' },
+      { date:'2025-11-18', title:'Reading Circle: Text & Practice', type:'Tmikha', blurb:'Interactive class' }
+    ];
+    const fmt=(d)=> new Date(d).toLocaleDateString(undefined,{year:'numeric',month:'short',day:'2-digit'});
+
+    function renderEvents(){
+      const wrap=document.getElementById('events-list');
+      wrap.innerHTML='';
+      events.forEach(ev=>{
+        const row=document.createElement('div');
+        row.className='event';
+        row.innerHTML=`
+          <div class="date">${fmt(ev.date)}</div>
+          <div>
+            <strong>${ev.title}</strong>
+            <div style="color:var(--muted)">${ev.blurb}</div>
+          </div>
+          <div class="pill">${ev.type}</div>`;
+        wrap.appendChild(row);
+      })
+    }
+
+    // Contact form (demo only)
+    function submitForm(form){
+      const data=Object.fromEntries(new FormData(form).entries());
+      alert(`Thank you, ${data.name}! We received your message.`);
+      form.reset();
+    }
+
+    document.getElementById('year').textContent=new Date().getFullYear();
+    renderEvents();
+  </script>
+
+<script>
+(function(){
+  const btn = document.querySelector('.nav-toggle');
+  const menu = document.getElementById('site-menu');
+  if(!btn || !menu) return;
+
+  function setState(open){
+    document.documentElement.classList.toggle('nav-open', open);
+    btn.setAttribute('aria-expanded', open ? 'true' : 'false');
+  }
+  btn.addEventListener('click', function(){
+    const open = document.documentElement.classList.contains('nav-open');
+    setState(!open);
+  });
+  // Close on Escape
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'Escape'){ setState(false); }
+  });
+  // Close after clicking a link inside the menu
+  menu.addEventListener('click', function(e){
+    const a = e.target.closest('a');
+    if(a){ setState(false); }
+  });
+})();
+</script>
+
+</body>
+</html>
